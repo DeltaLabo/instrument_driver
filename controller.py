@@ -95,6 +95,16 @@ class Fuente:  # Esta clase describe cada neurona
                 self.instrument.write("MODE:SET {}".format(self.modo))
                 time.sleep(0.5)
                 return "2W"
+        else:
+            if self.modo == "2W":
+                self.modo = "4W"
+                self.instrument.write(":OUT:SENS CH1,ON")
+                return "4W"
+            elif self.modo == "4W":
+                self.modo = "2W"
+                self.instrument.write(":OUT:SENS CH1,OFF")
+                return "2W"
+
 
 
 # functions for the electronic load
