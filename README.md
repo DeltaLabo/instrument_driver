@@ -19,4 +19,8 @@ Replace Source with Load, if it is an electronic load.
 
 Good luck.
 
+Known issues:
+
+- With DP700 series, sometimes queries will fail and crash the program. I just recommed just changing the return line to whatever, or putting it inside a try except. It is not relevant and no one has ever used it, but it's nice to have.
+
 Contact: jairo.rb8@gmail.com
