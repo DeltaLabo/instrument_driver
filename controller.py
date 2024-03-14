@@ -27,7 +27,7 @@ class Source:
             return self.instrument.query(":OUTP? CH{}".format(channel))
         elif self.type == "DP711":
             self.instrument.write(":OUTP:STAT CH{:n},ON".format(channel))
-            return self.instrument.query(":OUTP:STAT? CH{}".format(channel))
+            return "ON"
         else:
             print("Command or instrument not supported:", self.type, "Turn on channel")
 
@@ -38,15 +38,18 @@ class Source:
             return self.instrument.query(":OUTP? CH{}".format(channel))
         elif self.type == "DP711":
             self.instrument.write(":OUTP:STAT CH{:n},OFF".format(channel))
-            return self.instrument.query(":OUTP:STAT? CH{}".format(channel))
+            return "OFF"
         else:
             print("Command or instrument not supported:", self.type, "Turn off channel")
 
     # apply voltage & current
     def apply_voltage_current(self, channel: int, voltage: float, current: float):
-        if self.type == "DP811" or self.type == "DP711":
+        if self.type == "DP811":
             self.instrument.write(":APPL CH{},{},{}".format(channel, voltage, current))
             return self.instrument.query(":APPL? CH{}".format(channel))
+        elif self.type == "DP711":
+            self.instrument.write(":APPL CH{},{},{}".format(channel, voltage, current))
+            return "{}V, {}A".format(voltage, current)
         else:
             print("Command or instrument not supported:", self.type, "Apply voltage, current")
 
